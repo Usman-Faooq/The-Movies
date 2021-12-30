@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TVshow_Search"
+    android:background="@color/purple_700">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tvshowtoobar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Search Movie Name"
+        app:titleTextColor="@color/white"
+        />
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_below="@+id/tvshowtoobar"
+        android:layout_width="match_parent"
+        android:id="@+id/tablayoutitem"
+        android:layout_height="wrap_content"
+        app:tabSelectedTextColor="@color/white"
+        app:tabIndicatorColor="@color/white"
+        android:background="@color/purple_700">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/movie_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Movies"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tv_tab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="TV Shows"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tablayoutitem">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searched_tvshow_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/theater" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

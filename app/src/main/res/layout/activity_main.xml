@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".BottomNavigationActivities.MainActivity">
+
 
     <ScrollView
         android:id="@+id/scrollview"
+        android:layout_above="@id/bottomnavigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,40 +20,47 @@
             android:background="#E1000000">
 
 
-            <ViewFlipper
+            <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/imageSlider"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:flipInterval="2000"
-                android:autoStart="true"
-                android:outAnimation="@android:anim/slide_out_right"
-                android:inAnimation="@android:anim/slide_in_left">
+                android:layout_height="400dp"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorEnabled="false"
+                app:sliderScrollTimeInSec="3"
+                android:layoutDirection="ltr"
+                app:sliderStartAutoCycle="true" />
+            
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/img1"/>
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/img3"/>
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/img4"/>
-
-            </ViewFlipper>
-
-            <TextView
-                android:id="@+id/theater"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="In Theater"
-                android:textColor="@color/white"
-                android:layout_marginLeft="10sp"
-                android:layout_marginTop="5sp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/theater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:text="In Theater"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="10sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/more_theater"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="10sp"
+                    android:layout_marginRight="10sp"
+                    android:src="@drawable/moreicon"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
@@ -60,33 +69,68 @@
                 android:layoutDirection="rtl" />
 
 
-            <TextView
-                android:id="@+id/pop_tvshow"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TV Show"
-                android:textColor="@color/white"
-                android:layout_marginLeft="10sp"
-                android:layout_marginTop="5sp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/pop_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:text="TV Show"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="10sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/more_pop_tvshow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:src="@drawable/moreicon"
+                    android:layout_marginTop="10sp"/>
+
+            </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="270sp"
                 android:id="@+id/pop_tvshow_recyclerview"
                 android:layoutDirection="rtl" />
 
-            <TextView
-                android:id="@+id/toptvshow"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Top Rated TV Show"
-                android:textColor="@color/white"
-                android:layout_marginLeft="10sp"
-                android:layout_marginTop="5sp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/topratertvshow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:text="Top Rated TV Show"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="10sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/more_toprated_tvshow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:src="@drawable/moreicon"
+                    android:layout_marginTop="10sp"/>
+
+            </RelativeLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -95,34 +139,70 @@
                 android:id="@+id/top_tvshow_recyclerview"
                 android:layoutDirection="rtl" />
 
-    <TextView
-        android:id="@+id/pop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Popular"
-        android:textColor="@color/white"
-        android:layout_marginLeft="10sp"
-        android:layout_marginTop="5sp"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/pop_mov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:text="Popular"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="10sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/more_pop_movies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:src="@drawable/moreicon"
+                    android:layout_marginTop="10sp"/>
+
+            </RelativeLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="270sp"
-        android:id="@+id/movie_recyclerview"
-        android:layoutDirection="rtl" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="270sp"
+                android:id="@+id/movie_recyclerview"
+                android:layoutDirection="rtl" />
 
-    <TextView
-        android:id="@+id/Upcoming"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Upcoming"
-        android:layout_marginLeft="10sp"
-        android:layout_marginTop="5dp"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/upcoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:text="Upcoming"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="10sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/more_upcoming_movies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:src="@drawable/moreicon"
+                    android:layout_marginTop="10sp"/>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcomingmovie_recyclerview"
@@ -131,16 +211,34 @@
                 android:layout_marginTop="10sp"
                 android:layoutDirection="rtl" />
 
-            <TextView
-                android:id="@+id/top"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="Top Rated"
-                android:layout_marginLeft="10sp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/topratedmov"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/allerta"
+                    android:text="Top Rated"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="10sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/more_toprated_movies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10sp"
+                    android:src="@drawable/moreicon"
+                    android:layout_marginTop="10sp"/>
+
+            </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/toprated_recyclerview"
@@ -151,11 +249,15 @@
 
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-50sp"
-        android:layout_below="@id/scrollview"/>
+        android:id="@+id/bottomnavigation"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/bottom_navigation"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:menu="@menu/bottom_menu"/>
 
 </RelativeLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Home"
+        android:icon="@drawable/homeicon"
+        android:id="@+id/home_act"/>
+
+    <item
+        android:title="Search"
+        android:icon="@drawable/searchicon"
+        android:id="@+id/search_act"/>
+
+    <item
+        android:id="@+id/activity_act"
+        android:title="Activity"
+        android:icon="@drawable/activityicon" />
+
+
+</menu>

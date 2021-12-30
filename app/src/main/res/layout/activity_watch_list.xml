@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_700"
+    tools:context=".BottomNavigationActivities.MoreActivities.WatchListActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Activity"
+        android:id="@+id/maintext"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_margin="10sp"
+        android:fontFamily="@font/allerta"/>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/maintext">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favourites"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/allerta"
+            android:padding="7sp"
+            android:textColor="@color/white"
+            android:background="@drawable/darkroundcorner"
+            android:layout_margin="5sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Watchlist"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/allerta"
+            android:padding="7sp"
+            android:background="@drawable/roundcorner"
+            android:layout_margin="5sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Collections"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/allerta"
+            android:padding="7sp"
+            android:textColor="@color/white"
+            android:background="@drawable/darkroundcorner"
+            android:layout_margin="5sp"/>
+
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/watchlist_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/buttons" />
+
+</RelativeLayout>

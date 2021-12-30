@@ -12,7 +12,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Movies">
         <activity
-            android:name=".MainActivity"
+            android:name=".BottomNavigationActivities.MoreActivities.CollectionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BottomNavigationActivities.MoreActivities.WatchListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".VideoPlayerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TVshow_Search"
+            android:exported="true"
+            android:parentActivityName=".BottomNavigationActivities.Search" />
+        <activity
+            android:name=".Movies_Search"
+            android:exported="true"
+            android:parentActivityName=".BottomNavigationActivities.Search" />
+        <activity
+            android:name=".MoviesCompleteList"
+            android:exported="true" />
+        <activity
+            android:name=".BottomNavigationActivities.FavActivity"
+            android:exported="true" />
+        <activity
+            android:name=".BottomNavigationActivities.Search"
+            android:exported="true" />
+        <activity
+            android:name=".BottomNavigationActivities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +46,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MovieDescription"
-            android:exported="true"/>
+        <activity
+            android:name=".MovieDescription"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
