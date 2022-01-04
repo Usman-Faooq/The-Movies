@@ -27,6 +27,7 @@
         android:layout_below="@id/maintext">
 
         <TextView
+            android:id="@+id/favbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favourites"
@@ -50,6 +51,7 @@
             android:layout_margin="5sp"/>
 
         <TextView
+            android:id="@+id/collbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Collections"

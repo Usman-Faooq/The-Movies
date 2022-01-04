@@ -3,14 +3,18 @@ package com.example.movies
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movies.Adapters.CastAdapter
+import com.example.movies.Adapters.CollectionsAdapter
 import com.example.movies.Adapters.TrailerAdapter
 import com.example.movies.DataClasses.CastLink
 import com.example.movies.DataClasses.MovieDetail
+import com.example.movies.DataClasses.TVShowDetail
 import com.example.movies.DataClasses.TrailerLink
+import com.example.movies.RoomDB.CollectionData
 import com.example.movies.RoomDB.Data
 import com.example.movies.RoomDB.UserDataBase
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,6 +29,7 @@ class MovieDescription : AppCompatActivity() {
 
     lateinit var adapter: CastAdapter
     lateinit var trailerAdapter: TrailerAdapter
+    lateinit var collectionsAdapter: CollectionsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,8 @@ class MovieDescription : AppCompatActivity() {
 
         if (check == 0){
             getTVCast(id)
+            getTVShowDetail(id)
+            getTVTrailers(id, image, title, check)
         }else{
             getMovieCast(id)
             getMovieDetail(id)
@@ -59,13 +66,96 @@ class MovieDescription : AppCompatActivity() {
             if (checkexistdata == true){
                 //Show Message here
             }else{
-                var mov_data = Data(id, title, image, overview, rating, check, relase_date)
+                var mov_data = Data(id,title, image, overview, rating, check, relase_date)
                 GlobalScope.launch {
                     UserDataBase.getInstance(this@MovieDescription).userDao().insertData(mov_data)
                 }
                 //Show Message here
             }
         }
+
+        //insert or create collection
+        fav_btn.setOnLongClickListener(object : View.OnLongClickListener{
+            override fun onLongClick(p0: View?): Boolean {
+                collectioncard.visibility = View.VISIBLE
+
+                add_new_collection_textbox.setOnEditorActionListener { textView, i, keyEvent ->
+                    if (i == EditorInfo.IME_ACTION_DONE){
+                        var checkexistdata: Boolean = UserDataBase.getInstance(this@MovieDescription).userDao().checkExistingCollection(id)
+                        if (checkexistdata == true){
+                            collectioncard.visibility = View.GONE
+                        }else{
+                            var collectionname: String = add_new_collection_textbox.text.toString().toLowerCase()
+                            var mov_data = CollectionData(id,collectionname,title, image, overview, rating, check, relase_date)
+                            GlobalScope.launch {
+                                UserDataBase.getInstance(this@MovieDescription).userDao().collectionInsertion(mov_data)
+                            }
+                            collectioncard.visibility = View.GONE
+                        }
+                        true
+                    }
+                    false
+                }
+
+                val list: List<CollectionData> = UserDataBase.getInstance(this@MovieDescription).userDao().displayCollections()
+                if (list != null){
+                    noresult.visibility = View.GONE
+                    collectionsAdapter = CollectionsAdapter(this@MovieDescription,
+                        list, "insertion",id,title,image,overview,rating,check, relase_date)
+                    collectionrecyclerview.adapter = collectionsAdapter
+                    collectionrecyclerview.layoutManager = LinearLayoutManager(this@MovieDescription)
+
+                }else{
+                    noresult.visibility = View.VISIBLE
+                }
+
+                return true
+            }
+        })
+
+    }
+
+    private fun getTVTrailers(id: Int, image: String?, title: String?, check: Int) {
+        val trailer = ApiService.instance.getTVShowTrailer(id)
+        trailer.enqueue(object : Callback<TrailerLink>{
+            override fun onResponse(call: Call<TrailerLink>, response: Response<TrailerLink>) {
+                val getdata = response.body()
+                if (response!= null){
+                    Log.d("UGS_DATA: " , "Size: " + getdata!!.results.size)
+                    trailerAdapter = TrailerAdapter(this@MovieDescription, getdata!!.results, image!!, id, title!!, check)
+                    trailer_recyclerview.layoutManager = LinearLayoutManager(this@MovieDescription, LinearLayoutManager.HORIZONTAL, true)
+                    trailer_recyclerview.adapter = trailerAdapter
+                }
+            }
+
+            override fun onFailure(call: Call<TrailerLink>, t: Throwable) {
+
+            }
+        })
+    }
+
+    private fun getTVShowDetail(id: Int) {
+        val detail = ApiService.instance.getTVShowDetail(id)
+        detail.enqueue(object : Callback<TVShowDetail>{
+            override fun onResponse(call: Call<TVShowDetail>, response: Response<TVShowDetail>) {
+                val getdata = response.body()
+                if (getdata != null){
+                    stat.text = "Total Seasons"
+                    moviestatus.text = getdata.number_of_seasons.toString()
+                    bug_text.text = "Total Episodes"
+                    moviebudget.text = getdata.number_of_episodes.toString()
+                    revtext.visibility = View.GONE
+                    movierevenue.visibility = View.GONE
+                    runtext.visibility = View.GONE
+                    movieruntime.visibility = View.GONE
+                }
+            }
+
+            override fun onFailure(call: Call<TVShowDetail>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+
     }
 
     private fun getMovieTrailer(id: Int, image: String, title: String, check: Int) {

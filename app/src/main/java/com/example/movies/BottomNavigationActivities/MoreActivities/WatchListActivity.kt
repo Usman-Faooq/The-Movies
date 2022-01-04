@@ -1,5 +1,6 @@
 package com.example.movies.BottomNavigationActivities.MoreActivities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,15 @@ class WatchListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watch_list)
+
+        favbtn.setOnClickListener {
+            finish()
+        }
+
+        collbtn.setOnClickListener {
+            var intent = Intent(this, CollectionActivity::class.java)
+            startActivity(intent)
+        }
 
         getdata()
     }

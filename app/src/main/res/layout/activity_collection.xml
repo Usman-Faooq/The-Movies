@@ -27,6 +27,7 @@
         android:layout_below="@id/maintext">
 
         <TextView
+            android:id="@+id/collection_favbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favourites"
@@ -39,6 +40,7 @@
             android:layout_margin="5sp"/>
 
         <TextView
+            android:id="@+id/collection_watchlistbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Watchlist"
@@ -65,7 +67,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fav_recyclerview"
+        android:id="@+id/coll_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/buttons" />

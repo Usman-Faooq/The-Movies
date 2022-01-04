@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, Search::class.java);
                     overridePendingTransition(0,0)
                     startActivity(intent)
+                    bottomnavigation.selectedItemId = R.id.home_act
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, FavActivity::class.java);
                     overridePendingTransition(0,0)
                     startActivity(intent)
+                    bottomnavigation.selectedItemId = R.id.home_act
                     return@setOnNavigationItemSelectedListener true
                 }
             }
@@ -218,4 +220,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+
 }

@@ -92,9 +92,6 @@ class Search : AppCompatActivity() {
             intent.putExtra("serach_input", "marvel")
             startActivity(intent)
         }
-
-
-
-
     }
+
 }

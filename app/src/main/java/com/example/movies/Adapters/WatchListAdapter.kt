@@ -1,5 +1,6 @@
 package com.example.movies.Adapters
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.R
 import com.example.movies.RoomDB.Data
+import com.example.movies.RoomDB.UserDataBase
 import com.example.movies.RoomDB.WatchListData
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class WatchListAdapter(val context: Context, val data: List<WatchListData>)
     : RecyclerView.Adapter<WatchListAdapter.MyHolder>(){
@@ -34,6 +38,13 @@ class WatchListAdapter(val context: Context, val data: List<WatchListData>)
             Toast.makeText(context, "Name : " + getdata.trailer_title, Toast.LENGTH_SHORT).show()
         }
 
+        holder.close.setOnClickListener {
+            GlobalScope.launch {
+                UserDataBase.getInstance(context).userDao().deleteWatchList(getdata.movie_id!!)
+            }
+            (context as Activity).recreate()
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -44,6 +55,7 @@ class WatchListAdapter(val context: Context, val data: List<WatchListData>)
     class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var clickcover = itemView.findViewById<RelativeLayout>(R.id.paging_click_cover)
         var movie_img = itemView.findViewById<ImageView>(R.id.movie_img)
+        var close = itemView.findViewById<ImageView>(R.id.remove_fav)
         var movie_title = itemView.findViewById<TextView>(R.id.moviename)
         var movie_date = itemView.findViewById<TextView>(R.id.moviedate)
         var searchrating = itemView.findViewById<RatingBar>(R.id.search_movie_rating)

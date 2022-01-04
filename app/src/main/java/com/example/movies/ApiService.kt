@@ -1,9 +1,6 @@
 package com.example.movies
 
-import com.example.movies.DataClasses.CastLink
-import com.example.movies.DataClasses.LinkData
-import com.example.movies.DataClasses.MovieDetail
-import com.example.movies.DataClasses.TrailerLink
+import com.example.movies.DataClasses.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -61,6 +58,14 @@ interface Apiinterface {
     //Get Movie Trailer
     @GET("3/movie/{movie_id}/videos?api_key=0b879c1b4ba756a622fb4980d2d446f4")
     fun getMovieTrailer(@Path("movie_id") id: Int) : Call<TrailerLink>
+
+    //Get TVShow Detail...
+    @GET("3/tv/{show_id}?api_key=0b879c1b4ba756a622fb4980d2d446f4")
+    fun getTVShowDetail(@Path("show_id") id: Int) : Call<TVShowDetail>
+
+    //Get TV Show Trailer
+    @GET("3/tv/{show_id}/videos?api_key=0b879c1b4ba756a622fb4980d2d446f4")
+    fun getTVShowTrailer(@Path("show_id") id: Int) : Call<TrailerLink>
 
 }
 

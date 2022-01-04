@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Movies">
         <activity
+            android:name=".BottomNavigationActivities.MoreActivities.CollectionMoviesList"
+            android:exported="true" />
+        <activity
             android:name=".BottomNavigationActivities.MoreActivities.CollectionActivity"
             android:exported="true" />
         <activity

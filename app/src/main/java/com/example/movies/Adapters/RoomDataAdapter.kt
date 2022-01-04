@@ -1,19 +1,21 @@
 package com.example.movies.Adapters
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.MovieDescription
 import com.example.movies.R
 import com.example.movies.RoomDB.Data
+import com.example.movies.RoomDB.UserDataBase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RoomDataAdapter(val context: Context, val data: List<Data>) :
     RecyclerView.Adapter<RoomDataAdapter.MyHolder>() {
@@ -32,6 +34,15 @@ class RoomDataAdapter(val context: Context, val data: List<Data>) :
         holder.ratingtext.text = getdata.movie_rating.toString() + "/10"
         holder.movie_title.text = getdata.movie_title
         holder.movie_date.text = getdata.relase_date
+
+        holder.close.setOnClickListener {
+            GlobalScope.launch {
+                UserDataBase.getInstance(context).userDao().deleteData(getdata.movie_id!!)
+            }
+            Toast.makeText(context, "Delete suc...", Toast.LENGTH_SHORT).show()
+            (context as Activity).recreate()
+
+        }
 
         holder.clickcover.setOnClickListener {
             val intent = Intent(context, MovieDescription::class.java)
@@ -58,6 +69,7 @@ class RoomDataAdapter(val context: Context, val data: List<Data>) :
         var movie_img = itemView.findViewById<ImageView>(R.id.movie_img)
         var movie_title = itemView.findViewById<TextView>(R.id.moviename)
         var movie_date = itemView.findViewById<TextView>(R.id.moviedate)
+        var close = itemView.findViewById<ImageView>(R.id.remove_fav)
         var searchrating = itemView.findViewById<RatingBar>(R.id.search_movie_rating)
         var ratingtext = itemView.findViewById<TextView>(R.id.search_ratingtext)
     }

@@ -3,8 +3,10 @@ package com.example.movies.BottomNavigationActivities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.Adapters.RoomDataAdapter
+import com.example.movies.BottomNavigationActivities.MoreActivities.CollectionActivity
 import com.example.movies.BottomNavigationActivities.MoreActivities.WatchListActivity
 import com.example.movies.R
 import com.example.movies.RoomDB.Data
@@ -51,6 +53,11 @@ class FavActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        collectionbtn.setOnClickListener {
+            var intent = Intent(this, CollectionActivity::class.java)
+            startActivity(intent)
+        }
+
 
         getData()
 
@@ -64,7 +71,7 @@ class FavActivity : AppCompatActivity() {
             fav_recyclerview.layoutManager = LinearLayoutManager(this@FavActivity)
             fav_recyclerview.setHasFixedSize(false)
         }else{
-            maintext.text = "List_Null..."
+
         }
     }
 }

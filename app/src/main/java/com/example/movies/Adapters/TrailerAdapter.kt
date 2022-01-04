@@ -2,6 +2,7 @@ package com.example.movies.Adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +38,6 @@ class TrailerAdapter(val context: Context,
 
 
             holder.trailer_name.text = data.name
-            val video_key : String = data.key
             val trailer_id : String = data.id
 
             holder.clickcover.setOnClickListener {
@@ -45,15 +45,17 @@ class TrailerAdapter(val context: Context,
                 //add data to watchlist in room database
                 var checkexistdata = UserDataBase.getInstance(context).userDao().checkWatchListExisting(id, data.id)
                 if (checkexistdata == true){
-                    //Show Message here
+                    Log.d("UGSLogs:","Data Exist...")
                 }else{
                     var watchlistdata = WatchListData(id,data.id,movie_title,data.name,check, trailerimage)
                     GlobalScope.launch {
                         UserDataBase.getInstance(context).userDao().insertWatchData(watchlistdata)
                     }
                     //Show Message here
+                    Log.d("UGSLogs:","Data Inserted...")
                 }
 
+                val video_key : String = data.key
                 val intent = Intent(context, VideoPlayerActivity::class.java)
                 intent.putExtra("video_key", video_key)
                 intent.putExtra("trailer_name", data.name)

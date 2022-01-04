@@ -13,4 +13,6 @@ data class WatchListData(
     var trailer_title: String?,
     var check_cat: Int?,
     var trailerimage: String?
-)
+
+
+    )
